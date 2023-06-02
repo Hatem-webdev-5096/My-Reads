@@ -29,7 +29,9 @@ const libRoutes = require("./routes/libRoutes");
 
 app.use("/auth", authRoutes);
 app.use("/library", libRoutes);
-
+app.get("/healthCheck", (req,res,next) => {
+  res.status(200).json({message:"server running"})
+});
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;
