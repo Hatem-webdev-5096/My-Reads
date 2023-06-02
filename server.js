@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin:"https://my-reads-de613.web.app/",
+  origin:"https://my-reads-de613.web.app",
   optionsSuccessStatus: 200,
   methods: 'GET,POST,PUT,PATCH,DELETE',
   credentials: true,
