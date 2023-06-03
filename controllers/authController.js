@@ -93,7 +93,7 @@ exports.googleSignin = async (req, res, next) => {
 
       res
         .status(200)
-        .cookie("jwt", clientToken, { httpOnly: true })
+        .cookie("jwt", clientToken, { httpOnly: true, sameSite:"none" })
         .json({
           message: "user created successfully",
           userData: {
@@ -175,7 +175,7 @@ exports.login = async (req, res, next) => {
           );
           res
             .status(200)
-            .cookie("jwt", token, { httpOnly: true })
+            .cookie("jwt", token, { httpOnly: true, sameSite:"none" })
             .json({
               userData: {
                 _id: user._id,
