@@ -32,7 +32,7 @@ exports.signup = async (req, res, next) => {
       });
       const savedUser = await newUser.save();
 
-      const activationLink = `http://localhost:3000/auth/confirm-email/${activationToken}`;
+      const activationLink = `https://my-reads-de613.web.app/auth/confirm-email/${activationToken}`;
 
       await sendEmail.sendActivationEmail(savedUser, activationLink);
 
@@ -152,7 +152,7 @@ exports.login = async (req, res, next) => {
         throw error;
       } else {
         if (!user.accountActivated) {
-          const activationLink = `http://localhost:3000/auth/confirm-email/${user.accountActivationToken}`;
+          const activationLink = `https://my-reads-de613.web.app/auth/confirm-email/${user.accountActivationToken}`;
           await sendEmail.resendActivationEmail(user, activationLink);
           const error = new Error(
             "Account is not activated, please check your email"

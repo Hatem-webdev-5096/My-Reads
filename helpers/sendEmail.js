@@ -12,11 +12,6 @@ let apiContactInstance = new SibApiV3Sdk.ContactsApi();
 
 let createContact = new SibApiV3Sdk.CreateContact();
 
-let updateContact = new SibApiV3Sdk.UpdateContact();
-
-let apiAttributesInstance = SibApiV3Sdk.CreateAttribute;
-
-let createAttribute = new SibApiV3Sdk.CreateAttribute();
 
 module.exports = {
   sendActivationEmail: async (user, activationLink) => {
