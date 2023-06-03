@@ -93,7 +93,7 @@ exports.googleSignin = async (req, res, next) => {
 
       res
         .status(200)
-        .cookie("jwt", clientToken, { httpOnly: true, sameSite:"none" })
+        .cookie("jwt", clientToken, { httpOnly: true, sameSite: "none" })
         .json({
           message: "user created successfully",
           userData: {
@@ -119,7 +119,11 @@ exports.googleSignin = async (req, res, next) => {
       );
       res
         .status(200)
-        .cookie("jwt", clientToken, { httpOnly: true })
+        .cookie("jwt", clientToken, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+        })
         .json({
           message: "Signed in succesfully",
           user: {
@@ -175,7 +179,11 @@ exports.login = async (req, res, next) => {
           );
           res
             .status(200)
-            .cookie("jwt", token, { httpOnly: true, sameSite:"none" })
+            .cookie("jwt", token, {
+              httpOnly: true,
+              sameSite: "none",
+              secure: true,
+            })
             .json({
               userData: {
                 _id: user._id,
@@ -228,35 +236,36 @@ exports.logout = async (req, res, next) => {
   }
 };
 
-
-exports.changePassword = async(req,res,next) => {
+exports.changePassword = async (req, res, next) => {
   try {
     const userId = req.userId;
     const user = await User.findById(userId);
     if (!user) {
       const error = new Error("user not found.");
       error.message("Can't change password, you are signed in using Google.");
-      error.status=404;
+      error.status = 404;
       throw error;
-    } 
-     const validPassword = await bCrypt.compare(req.body.password, user.password);
+    }
+    const validPassword = await bCrypt.compare(
+      req.body.password,
+      user.password
+    );
     if (!validPassword) {
       const error = new Error("The password you entered is incorrect.");
-      error.message = ("The password you entered is incorrect.");
-      error.status=403;
+      error.message = "The password you entered is incorrect.";
+      error.status = 403;
       throw error;
     }
     const hashedNewPassword = await bCrypt.hash(req.body.newPassword, 16);
     user.password = hashedNewPassword;
     await user.save();
-    res.status(200).json({message:"Password updated succesfully"});
-    
+    res.status(200).json({ message: "Password updated succesfully" });
   } catch (error) {
     next(error);
   }
-}
+};
 
-exports.checkLogin = async(req,res,next) => {
+exports.checkLogin = async (req, res, next) => {
   const userId = req.userId;
   try {
     let user = await User.findById(userId);
@@ -293,8 +302,8 @@ exports.checkLogin = async(req,res,next) => {
           shelves: user.bookShelves,
         },
       });
-    
   } catch (error) {
-    next(error);``
+    next(error);
+    ``;
   }
-}
+};
