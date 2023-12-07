@@ -32,7 +32,9 @@ exports.signup = async (req, res, next) => {
       });
       const savedUser = await newUser.save();
 
-      const activationLink = `https://my-reads-react.onrender.com/auth/confirm-email/${activationToken}`;
+      // const activationLink = `https://my-reads-react.onrender.com/auth/confirm-email/${activationToken}`;
+      const activationLink = `http://localhost:3000/auth/confirm-email/${activationToken}`;
+
 
       await sendEmail.sendActivationEmail(savedUser, activationLink);
 

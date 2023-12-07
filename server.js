@@ -10,7 +10,8 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin:"https://my-reads-react.onrender.com",
+  // origin:"https://my-reads-react.onrender.com",
+  origin: "http://localhost:3000",
   optionsSuccessStatus: 200,
   methods: 'GET,POST,PUT,PATCH,DELETE',
   credentials: true,

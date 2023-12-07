@@ -152,7 +152,7 @@ exports.changeBookShelf = async (req, res, next) => {
       return book === req.body.bookId;
     });
 
-    if (bookIndexTargetShelf === -1) {
+    if (bookIndexTargetShelf !== -1) {
       const error = new Error("Book already in target shelf");
       error.status = 404;
       error.message = "Book is already in target shelf.";

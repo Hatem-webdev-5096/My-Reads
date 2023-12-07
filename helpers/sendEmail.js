@@ -22,8 +22,8 @@ module.exports = {
         LASTNAME: user.lastName,
         ACTIVATION_LINK: activationLink,
       };
-
-      const createContactResponse = await apiContactInstance.createContact(
+      console.log(activationLink);
+      await apiContactInstance.createContact(
         createContact
       );
 
@@ -35,7 +35,7 @@ module.exports = {
         "FIRSTNAME ": user.firstName,
         ACTIVATION_LINK: activationLink,
       };
-      const sendEmailResponse = await apiSendInstance.sendTransacEmail(
+      await apiSendInstance.sendTransacEmail(
         sendSmtpEmail
       );
     } catch (error) {
